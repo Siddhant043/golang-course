@@ -39,6 +39,7 @@ func main() {
 		fmt.Println("ERROR!")
 		fmt.Println(err)
 		fmt.Println("----------------")
+		panic("Can't continue, sorry.")
 	}
 	writeBalanceToFile(account_balance)
 	fmt.Println("Welcome to Go Bank!")
