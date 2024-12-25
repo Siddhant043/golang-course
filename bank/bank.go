@@ -1,10 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
+
+func writeBalanceToFile(balance float64) {
+	balanceStr := fmt.Sprint(balance)
+	os.WriteFile("balance.txt", []byte(balanceStr), 0644)
+}
 
 func main() {
 
 	var account_balance = 1000.0
+	writeBalanceToFile(account_balance)
 	fmt.Println("Welcome to Go Bank!")
 	for {
 
@@ -29,6 +38,7 @@ func main() {
 				continue
 			}
 			account_balance += amt
+			writeBalanceToFile(account_balance)
 			fmt.Println("Your updated balance is:", account_balance)
 		} else if choice == 3 {
 			var amt float64
@@ -43,6 +53,7 @@ func main() {
 				continue
 			} else {
 				account_balance -= amt
+				writeBalanceToFile(account_balance)
 				fmt.Println("Your updated balance is:", account_balance)
 			}
 		} else {
@@ -50,7 +61,6 @@ func main() {
 			break
 		}
 
-		fmt.Println("Your choice is ", choice)
 	}
 	fmt.Println("Thanks for choosing our bank")
 }
