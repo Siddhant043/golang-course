@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type user struct {
 	firstName string
@@ -19,13 +22,16 @@ func (u *user) clearUserData() {
 	u.lastName = ""
 }
 
-// This is how we write a constructor for a struct
-func newUser(firstName, lastName, birthdate string) user {
-	return user{
+// This is how we write a constructor for a struct, you can also use pointer approach to avoid creating a copy variable
+func newUser(firstName, lastName, birthdate string) (*user, error) {
+	if firstName == "" || lastName == "" || birthdate == "" {
+		return nil, errors.New("firstName, lastName and birthdate are required")
+	}
+	return &user{
 		firstName: firstName,
 		lastName:  lastName,
 		birthdate: birthdate,
-	}
+	}, nil
 }
 
 func main() {
@@ -33,7 +39,12 @@ func main() {
 	userLastName := getUserData("Please enter your Last Name: ")
 	userBirthdate := getUserData("Please enter your Birth Date (MM/DD/YYY): ")
 
-	appUser := newUser(userFirstName, userLastName, userBirthdate)
+	appUser, err := newUser(userFirstName, userLastName, userBirthdate)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	appUser.outputUserDetails()
 	appUser.clearUserData()
@@ -44,6 +55,6 @@ func main() {
 func getUserData(msg string) string {
 	fmt.Print(msg)
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value) // When using Scanln, hitting enter enter means closing the input.
 	return value
 }
