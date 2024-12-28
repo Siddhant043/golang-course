@@ -11,6 +11,14 @@ type User struct {
 	birthdate string
 }
 
+// Struct Embedding
+
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
 func (u User) OutputUserDetails() {
 	// this is a shortcut provided by go, technically it is (*u).firstName), you have to dereference it normally
 	fmt.Println(u.firstName, u.lastName, u.birthdate)
@@ -32,4 +40,16 @@ func New(firstName, lastName, birthdate string) (*User, error) {
 		lastName:  lastName,
 		birthdate: birthdate,
 	}, nil
+}
+
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "Siddhant",
+			lastName:  "Mishra",
+			birthdate: "---",
+		},
+	}
 }
