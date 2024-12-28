@@ -20,10 +20,11 @@ func main() {
 		lastName:  userLastName,
 		birthdate: userBirthdate,
 	}
-	outputUserDetails(appUser)
+	outputUserDetails(&appUser)
 }
 
-func outputUserDetails(u user) {
+func outputUserDetails(u *user) {
+	// this is a shortcut provided by go, technically it is (*u).firstName), you have to dereference it normally
 	fmt.Println(u.firstName, u.lastName, u.birthdate)
 }
 
