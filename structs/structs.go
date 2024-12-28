@@ -19,19 +19,26 @@ func (u *user) clearUserData() {
 	u.lastName = ""
 }
 
+// This is how we write a constructor for a struct
+func newUser(firstName, lastName, birthdate string) user {
+	return user{
+		firstName: firstName,
+		lastName:  lastName,
+		birthdate: birthdate,
+	}
+}
+
 func main() {
 	userFirstName := getUserData("Please enter your First Name: ")
 	userLastName := getUserData("Please enter your Last Name: ")
 	userBirthdate := getUserData("Please enter your Birth Date (MM/DD/YYY): ")
 
-	appUser := user{
-		firstName: userFirstName,
-		lastName:  userLastName,
-		birthdate: userBirthdate,
-	}
+	appUser := newUser(userFirstName, userLastName, userBirthdate)
+
 	appUser.outputUserDetails()
 	appUser.clearUserData()
 	appUser.outputUserDetails()
+
 }
 
 func getUserData(msg string) string {
