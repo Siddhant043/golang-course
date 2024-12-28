@@ -13,6 +13,12 @@ func (u user) outputUserDetails() {
 	fmt.Println(u.firstName, u.lastName, u.birthdate)
 }
 
+// to mutate data in a struct as shown in below method you should pass the pointer so actual struct is mutated rather than its copy
+func (u *user) clearUserData() {
+	u.firstName = ""
+	u.lastName = ""
+}
+
 func main() {
 	userFirstName := getUserData("Please enter your First Name: ")
 	userLastName := getUserData("Please enter your Last Name: ")
@@ -23,6 +29,8 @@ func main() {
 		lastName:  userLastName,
 		birthdate: userBirthdate,
 	}
+	appUser.outputUserDetails()
+	appUser.clearUserData()
 	appUser.outputUserDetails()
 }
 
