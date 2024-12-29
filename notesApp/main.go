@@ -7,11 +7,40 @@ import (
 	"strings"
 
 	"example.com/notes/note"
+	"example.com/notes/todo"
 )
+
+type saver interface {
+	Save() error // it tells that a valid value must have a Save() method which takes no arguments and returns a error
+}
+
+// type displayer interface {
+// 	Display() error
+// }
+
+// type outputable interface {
+// 	Save()
+// 	Display()
+// }
+
+type outputable interface {
+	saver
+	Display()
+}
 
 func main() {
 
 	title, content := getNoteData()
+
+	todoText := getUserInput("Todo text:")
+
+	todo, err := todo.New(todoText)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	outputData(todo)
 
 	usernote, err := note.New(title, content)
 
@@ -20,15 +49,25 @@ func main() {
 		return
 	}
 
-	usernote.Display()
+	outputData(usernote)
 
-	err = usernote.Save()
+}
+
+func outputData(data outputable) error {
+	data.Display()
+	return saveData(data)
+}
+
+func saveData(data saver) error {
+	err := data.Save()
 
 	if err != nil {
-		fmt.Println("saving the notes failed")
-		return
+		fmt.Println("saving the data failed")
+		return err
+
 	}
-	fmt.Println("saving the notes succeeded")
+	fmt.Println("saving the data succeeded")
+	return nil
 }
 
 func getNoteData() (string, string) {
