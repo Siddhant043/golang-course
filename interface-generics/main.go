@@ -9,26 +9,6 @@ func main() {
 	add(a, b)
 }
 
-func add(a, b interface{}) {
-	aInt, aIsInt := a.(int)
-	bInt, bIsInt := b.(int)
-
-	if aIsInt && bIsInt {
-		fmt.Println(aInt + bInt)
-	}
-
-	aFloat, aIsFloat := a.(float64)
-	bFloat, bIsFloat := b.(float64)
-
-	if aIsFloat && bIsFloat {
-		fmt.Println(aFloat + bFloat)
-	}
-
-	aString, aIsString := a.(string)
-	bString, bIsString := b.(string)
-
-	if aIsString && bIsString {
-		fmt.Println(aString + bString)
-	}
-
+func add[T int | float64 | string](a, b T) {
+	fmt.Println(a + b)
 }
