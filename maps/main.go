@@ -16,4 +16,16 @@ func main() {
 
 	delete(websites, "Google")
 	fmt.Println(websites)
+
+	usingMake()
+}
+
+func usingMake() {
+	foodRatings := make(map[string]float64, 3)
+
+	foodRatings["Samosa"] = 4.3
+	foodRatings["Khasta"] = 4.6
+	foodRatings["Kulcha"] = 4.4
+
+	fmt.Println(foodRatings)
 }
