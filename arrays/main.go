@@ -12,7 +12,8 @@ func main() {
 	//slicesExample()
 	//dynamicArrayExample()
 	//arrayPractice()
-	unpackingArr()
+	//unpackingArr()
+	usingMake()
 }
 
 func slicesExample() {
@@ -95,4 +96,14 @@ func unpackingArr() {
 	updatedPriceList := append(priceListOne, priceListTwo...)
 
 	fmt.Println(updatedPriceList)
+}
+
+func usingMake() {
+	userNames := make([]string, 2, 5)
+	userNames[0] = "Bruce"
+
+	userNames = append(userNames, "Clark")
+	userNames = append(userNames, "Diana")
+
+	fmt.Println(userNames)
 }
