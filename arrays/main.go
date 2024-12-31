@@ -11,7 +11,8 @@ type Product struct {
 func main() {
 	//slicesExample()
 	//dynamicArrayExample()
-	arrayPractice()
+	//arrayPractice()
+	unpackingArr()
 }
 
 func slicesExample() {
@@ -84,4 +85,14 @@ func arrayPractice() {
 	newProduct := Product{id: "phone3", title: "Phone 3", price: 99.10}
 	productsArr = append(productsArr, newProduct)
 	fmt.Println("Updated Products: ", productsArr)
+}
+
+func unpackingArr() {
+	priceListOne := []float64{2.32, 3.33, 1.24, 5.40}
+
+	priceListTwo := []float64{20.32, 30.33, 10.24, 50.40}
+
+	updatedPriceList := append(priceListOne, priceListTwo...)
+
+	fmt.Println(updatedPriceList)
 }
