@@ -9,6 +9,8 @@ func main() {
 
 	doubleNums := transformNumbers(&numbers, double)
 	fmt.Println(doubleNums)
+	sum := sumUp(1, 2, 3)
+	fmt.Println(sum)
 }
 
 func transformNumbers(nums *[]int, transform funcInt) []int {
@@ -22,4 +24,12 @@ func transformNumbers(nums *[]int, transform funcInt) []int {
 
 func double(num int) int {
 	return num * 2
+}
+
+func sumUp(nums ...int) int {
+	sum := 0
+	for _, value := range nums {
+		sum += value
+	}
+	return sum
 }
